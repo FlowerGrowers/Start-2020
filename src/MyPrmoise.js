@@ -1,15 +1,15 @@
 /*
- * @Author: jack 
+ * @Author: jack
  * @Date: 2020-09-06 17:18:23
- * @LastEditTime: 2020-09-06 19:42:02
+ * @LastEditTime: 2020-09-06 19:45:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \手写Promise\src\MyPrmoise.js
  */
 
-const PENDING = 'PENDING',
-  FULFILLED = 'FULFILLED',
-  REJECTED = 'REJECTED'
+const PENDING = "PENDING",
+  FULFILLED = "FULFILLED",
+  REJECTED = "REJECTED";
 
 class MyPromise {
   constructor(executor) {
@@ -28,17 +28,17 @@ class MyPromise {
         this.status = FULFILLED;
 
         // 发布
-        this.onFulfilledCallBacks.forEach(fn => fn());
+        this.onFulfilledCallBacks.forEach((fn) => fn());
       }
-    }
+    };
     const reject = (reason) => {
       if (this.status === PENDING) {
         this.reason = reason;
         this.status = REJECTED;
 
-        this.onRejectedCallBacks.forEach(fn => fn());
+        this.onRejectedCallBacks.forEach((fn) => fn());
       }
-    }
+    };
     try {
       executor(resolve, reject);
     } catch (error) {
@@ -48,26 +48,24 @@ class MyPromise {
 
   then(onFulfilled, onRejected) {
     if (this.status === FULFILLED) {
-      onFulfilled(this.value)
+      onFulfilled(this.value);
     }
 
     if (this.status === REJECTED) {
-      onRejected(this.reason)
+      onRejected(this.reason);
     }
 
     // 发布订阅的模式
     if (this.status === PENDING) {
       this.onFulfilledCallBacks.push(() => {
         onFulfilled(this.value);
-      })
+      });
 
       this.onRejectedCallBacks.push(() => {
-        onRejected(this.reason)
-      })
+        onRejected(this.reason);
+      });
     }
-
   }
-
 }
 
 module.exports = MyPromise;
