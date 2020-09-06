@@ -1,7 +1,7 @@
 /*
  * @Author: jack
  * @Date: 2020-09-06 17:18:23
- * @LastEditTime: 2020-09-06 23:48:43
+ * @LastEditTime: 2020-09-07 01:08:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \手写Promise\src\MyPrmoise.js
@@ -12,7 +12,40 @@ const PENDING = "PENDING",
   REJECTED = "REJECTED";
 
 const reslovePromise = (promise2, x, resolve, reject) => {
-  console.log(x);
+  const called = false;
+
+  if (promise2 === x) {
+    reject(new Error("会陷入一种死循环"));
+  }
+
+  if ((typeof x === "object" && x !== null) || typeof x === "function") {
+    try {
+      let then = x.then;
+      if (typeof x === "function") {
+        then.call(
+          x,
+          (y) => {
+            if (called) return;
+            called = true;
+            reslovePromise(promise2, y, resolve, reject);
+          },
+          (r) => {
+            if (called) return;
+            called = true;
+            reject(r);
+          }
+        );
+      } else {
+        resolve(x);
+      }
+    } catch (error) {
+      if (called) return;
+      called = true;
+      reject(error);
+    }
+  } else {
+    resolve(x);
+  }
 };
 
 class MyPromise {
