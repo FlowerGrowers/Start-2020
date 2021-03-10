@@ -6,7 +6,7 @@
  * @Description: In User Settings Edi
  * @FilePath: \手写Promise\src\index.js
  */
-const MyPromise = require("./MyPrmoise");
+const MyPromise = require('./MyPrmoise');
 
 // const promise = new MyPromise((resolve, reject) => {
 //   // resolve('success');
@@ -27,13 +27,14 @@ const MyPromise = require("./MyPrmoise");
 // );
 
 const promise = new MyPromise((resolve, reject) => {
-  resolve("success");
+  resolve('success');
 });
 
 const promise2 = promise
   .then((value) => {
-    return value + " " + "-> then" + " " + "promise2";
+    return value + ' ' + '-> then' + ' ' + 'promise2';
   })
   .then((value) => {
     console.log(value);
+    console.log('11', 11);
   });
