@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      #ctx {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="ctx" width="150" height="150"></canvas>
+  </body>
+  <script>
+    function draw() {
+      var canvas = document.getElementById('ctx');
+      if (canvas.getContext) var ctx = canvas.getContext('2d');
+      // paint two easy rect
+      ctx.fillStyle = 'rgba(200,0,0)';
+      // 绘制一个填充的矩形
+      ctx.fillRect(10, 10, 55, 50);
+
+      ctx.fillStyle = 'rgba(0,0,200,0.5)';
+      // 绘制一个矩形的边框
+      ctx.fillRect(30, 30, 55, 50);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      // 清除指定矩形区域，让清除部分完全透明。
+      ctx.clearRect(20, 20, 10, 10);
+
+      // 绘制一个填充的矩形
+      ctx.fillRect(40, 40, 55, 50);
+    }
+    draw();
+  </script>
+</html>

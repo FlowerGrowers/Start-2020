@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      #ctx {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="ctx" width="150" height="150"></canvas>
+  </body>
+  <script>
+    function draw() {
+      var canvas = document.getElementById('ctx');
+      if (canvas.getContext) var ctx = canvas.getContext('2d');
+
+      ctx.beginPath();
+      ctx.moveTo(35, 40);
+      ctx.arc(40, 40, 5, 0, Math.PI);
+      // ctx.closePath();
+      ctx.moveTo(50, 40);
+      ctx.arc(55, 40, 5, 0, Math.PI);
+
+      ctx.moveTo(90, 60);
+      ctx.arc(50, 60, 40, 0, 2 * Math.PI);
+
+      ctx.moveTo(70, 70);
+      ctx.arc(50, 70, 20, 0, Math.PI, true);
+
+      ctx.stroke();
+    }
+    draw();
+  </script>
+</html>
