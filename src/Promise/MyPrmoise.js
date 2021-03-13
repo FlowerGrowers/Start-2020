@@ -1,27 +1,18 @@
-/*
- * @Author: jack
- * @Date: 2020-09-06 17:18:23
- * @LastEditTime: 2020-09-07 01:08:18
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \手写Promise\src\MyPrmoise.js
- */
-
-const PENDING = "PENDING",
-  FULFILLED = "FULFILLED",
-  REJECTED = "REJECTED";
+const PENDING = 'PENDING',
+  FULFILLED = 'FULFILLED',
+  REJECTED = 'REJECTED';
 
 const reslovePromise = (promise2, x, resolve, reject) => {
   const called = false;
 
   if (promise2 === x) {
-    reject(new Error("会陷入一种死循环"));
+    reject(new Error('会陷入一种死循环'));
   }
 
-  if ((typeof x === "object" && x !== null) || typeof x === "function") {
+  if ((typeof x === 'object' && x !== null) || typeof x === 'function') {
     try {
       let then = x.then;
-      if (typeof x === "function") {
+      if (typeof x === 'function') {
         then.call(
           x,
           (y) => {

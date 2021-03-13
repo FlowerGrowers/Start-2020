@@ -1,12 +1,4 @@
-/*
- * @Author: your name
- * @Date: 2020-09-06 17:18:50
- * @LastEditTime: 2020-09-06 23:48:24
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edi
- * @FilePath: \手写Promise\src\index.js
- */
-const MyPromise = require("./MyPrmoise");
+const MyPromise = require('./MyPrmoise');
 
 // const promise = new MyPromise((resolve, reject) => {
 //   // resolve('success');
@@ -27,12 +19,12 @@ const MyPromise = require("./MyPrmoise");
 // );
 
 const promise = new MyPromise((resolve, reject) => {
-  resolve("success");
+  resolve('success');
 });
 
 const promise2 = promise
   .then((value) => {
-    return value + " " + "-> then" + " " + "promise2";
+    return value + ' ' + '-> then' + ' ' + 'promise2';
   })
   .then((value) => {
     console.log(value);
