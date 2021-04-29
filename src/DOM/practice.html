@@ -1,0 +1,21 @@
+<button id="ele">Click me!</button>
+<div id="some">
+  hide
+</div>
+
+<script>
+  // ele.onclick = function() {
+  //   some.style.display = 'none';
+  // };
+
+  // ele.onclick = function() {
+  //   console.log(1);
+  //   this.style.visibility = 'hidden';
+  // };
+
+  ele.addEventListener('click', () => alert(1));
+  ele.removeEventListener('click', () => alert(2));
+  ele.onclick = function() {
+    alert(3);
+  };
+</script>

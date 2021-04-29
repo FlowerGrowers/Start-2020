@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #app {
+        /* box-sizing: border-box; */
+        margin: 10px;
+        padding: 10px;
+        border: 10px solid;
+        width: 300px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">Hello world!</div>
+    <script>
+      // const app = document.getElementById('app');
+      // app.outerHTML = '<p>bye</p>';
+      // console.log(app.outerHTML);
+      let width = app.offsetWidth;
+      let height = app.offsetHeight;
+
+      let borderWidth = app.clientTop;
+      let borderHeight = app.clientLeft;
+
+      console.log('width,height', width, height);
+      console.log('borderWidth,borderHeight', borderWidth, borderHeight);
+    </script>
+  </body>
+</html>

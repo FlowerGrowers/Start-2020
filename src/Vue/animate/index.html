@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #app {
+        height: 100vh;
+        margin: 0 auto;
+        position: relative;
+        background-color: #ddd;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        height: 120px;
+      }
+
+      .row img {
+        width: 100px;
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+      }
+      .bottom .card {
+        width: 100px;
+        height: 40px;
+        background-color: greenyellow;
+      }
+      .move {
+        width: 100px;
+        height: 70.78px;
+        position: absolute;
+        z-index: 99;
+        /* background-color: red; */
+      }
+      .move-enter-active {
+        transition: all 4s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="row">
+        <div v-for="(item,index) in list" :key="item.id">
+          <img :src="item.cover" :alt="item.id" />
+          <button @click="addCard(index)">加入购物车</button>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="card" ref="card">购物车!</div>
+      </div>
+
+      <transition @enter="enter" name="move">
+        <div ref="moveDemo" v-show="isShow" class="move">hello</div>
+      </transition>
+    </div>
+    <script src="../../../node_modules/vue/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data() {
+          return {
+            list: [
+              { id: 1, cover: './demo1.png' },
+              { id: 2, cover: './demo1.png' },
+              { id: 3, cover: './demo1.png' },
+            ],
+            isShow: false,
+            currentIndex: -1,
+          };
+        },
+        methods: {
+          addCard(index) {
+            this.currentIndex = index;
+            const div = document.querySelectorAll('img')[this.currentIndex];
+            const { x, y } = div.getBoundingClientRect();
+            this.isShow = true;
+            const ele = this.$refs.moveDemo;
+            ele.style.left = x + 'px';
+            ele.style.top = y + 'px';
+            ele.style.background = `url(${this.list[this.currentIndex].cover})`;
+            ele.style.backgroundSize = '100% 100%';
+
+            const target = this.$refs.card;
+            const { x: a, y: b } = target.getBoundingClientRect();
+            ele.style.transform = `translate(${a - x}px,${b - y}px) scale(0,0)`;
+            // console.log(x, y, ele);
+          },
+          enter(el, done) {
+            console.log(el);
+          },
+        },
+      });
+      // console.log(vm);
+    </script>
+  </body>
+</html>

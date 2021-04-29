@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <input v-focus ></input>
+      <div class="app_title">
+        <div class="title_left">
+          <h2>{{ name }}</h2>
+          <span>{{ list.length }}</span>
+        </div>
+        <div class="title_right">
+          <div class="more">
+            <span class="more_circle"></span>
+            <span class="more_circle"></span>
+            <span class="more_circle"></span>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <template v-for="item in list">
+          <li :key="item.id" class="todo_card">
+            <div class="todo_content">
+              <span class="todo_circle"></span>
+              <span>{{ item.name }}</span>
+            </div>
+            <div class="todo_exact">
+              xxx
+            </div>
+          </li>
+        </template>
+        <li class="todo_card">
+          <div @click="addNewTask">
+            <span class="todo_plus"></span>
+            <span>Add task</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: 'To Do',
+            icon: '',
+            list: [
+              {
+                id: '_1',
+                name: 'GW Manager',
+              },
+              {
+                id: '_2',
+                name: 'Mece Test',
+              },
+            ],
+          };
+        },
+        methods: {
+          addNewTask(event) {
+            console.log(event);
+            const value = {
+              id: '_' + (this.list.length + 1),
+              name: 'New Task',
+            };
+            this.list.push(value);
+          },
+        },
+        watch: {
+          list: {
+            handler(newValue, oldValue) {
+              console.log(newValue, oldValue);
+            },
+            deep: true,
+          },
+        },
+        directives: {
+          focus: {
+            inserted(el,bindings,vnode){
+              el.focus();
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
